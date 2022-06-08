@@ -19,7 +19,7 @@ This is the number of Fock states in Hilbert space, or basically the maximum num
 This is the average value of the state, which means that typically the nth note in the scale or chord will be played the most. This value must be less than N.
 ##### Music Length
 The number of notes to play. This value should also be kept within 3 digits, because of computation time.
-###### Speed
+##### Speed
 Speed of playback in BPM
 ##### Bassline
 There is currently only one bassline option: the guitar part from the beginning of 'Right Now' by Van Halen. This sounds best with the C Minor Pentatonic scale option.
