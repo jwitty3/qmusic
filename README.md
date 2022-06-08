@@ -27,31 +27,20 @@ There is currently only one bassline option: the guitar part from the beginning 
 Play the generated notes in a loop. The loop will continue until the box is unckecked or the 'Stop' button is pressed.
 ##### Scale
 The set of notes that the program will choose from. To use a custom scale, insert a comma-separated list of the note indices from the list:
-
-C  0
-
-C# 1
-
-D  2
-
-D# 3
-
-E  4
-
-F  5
-
-F# 6
-
-G  7
-
-G# 8
-
-A  9
-
-A# 10
-
-B  11
-
+```
+0: C
+1: C#
+2: D
+3: D#
+4: E
+5: F
+6: F#
+7: G
+8: G#
+9: A
+10: A#
+11: B
+```
 For example, a D major 7 chord: `2, 6, 9, 1`
 ##### State
 The quantum state
