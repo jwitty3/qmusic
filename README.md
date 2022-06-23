@@ -57,11 +57,11 @@ In addition, a graph of the state's probability distribution will be shown.
 
 The modules required to run [qmusic.py](./src/qmusic/qmusic.py) are qutip, numpy, matplotlib, scipy, and tkinter. These can be installed with
 ```
-pip install qutip numpy matplotlib scipy tk
+pip install qutip numpy matplotlib pygame scipy tk
 ```
 or
 ```
-python3 -m pip install qutip numpy matplotlib scipy tk
+python3 -m pip install qutip numpy matplotlib pygame scipy tk
 ```
 
 ## Distributions
