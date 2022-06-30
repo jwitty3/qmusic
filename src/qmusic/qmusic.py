@@ -51,7 +51,7 @@ def main():
     ], dtype=np.ndarray)
 
     states = [coherent(20, 1.73)]
-    
+
     if (platform.system() == "Windows"):
         awareness = ctypes.c_int()
         errorCode = ctypes.windll.shcore.GetProcessDpiAwareness(0, ctypes.byref(awareness))
@@ -64,7 +64,7 @@ def main():
     pygame.mixer.init(size=32)
     bassbox = IntVar()
     loopbox = IntVar()
-    volume = 1.0;
+    looptimer = 1#root.after(0, lambda: None)
     
     #generate data array by measuring a state
     def generate():
@@ -113,19 +113,20 @@ def main():
             freqs = np.append(freqs, freq)
 
         #generate sounds using pygame sounds
-        buffer = []
+        buffer = np.array([]).astype(np.float32)
         for index in range(state.size):
             #to change the wave in the buffer variable, use "signal.square" or "np.sine" (or maybe "signal.sweep.poly") or "signal.sawtooth"
-            t = 2 * np.pi * np.arange(fs * 60 / bpm)
+            t = 2 * np.pi * np.arange(fs * 2 * 60 / bpm)
             buffer = np.concatenate((buffer, signal.sawtooth(t * freqs[int(state[index])] / fs).astype(np.float32)))
         
         #generate bassline
-        bassbuffer = []
+        bassbuffer = np.array([]).astype(np.float32)
         for index in range(int(bassline.size / 4)):
             bassarr = bassline[index]
-            y = 2 * np.pi * np.arange(fs * bassarr[1] * 60 / bpm)
+            y = 2 * np.pi * np.arange(fs * bassarr[1] * 2 * 60 / bpm)
             bassbuffer = np.concatenate((bassbuffer, np.sin(y * notes[int(bassarr[2])] * bassarr[3] / fs).astype(np.float32)))
             bassindex += 1
+        
         
         basssound = pygame.mixer.Sound(bassbuffer)
         sound = pygame.mixer.Sound(buffer)
@@ -136,7 +137,8 @@ def main():
             if (playbutton['text'] == "Play"):
                 return
             sound.play()
-            content.after(int(sound.get_length() * 1000), lambda: playsound() if loopbox.get() == 1 else cancelsound())       
+            nonlocal looptimer
+            looptimer = root.after(int(sound.get_length() * 1000), lambda: playsound() if loopbox.get() == 1 else cancelsound())   
         playsound()
         if (bassbox.get() == 1):
             basssound.play()
@@ -146,6 +148,7 @@ def main():
         playbutton.configure(command=generate)
         playbutton['text'] = "Play"
         pygame.mixer.stop()
+        root.after_cancel(looptimer)
         
     def setvolume(obj):
         for sound in sounds:
