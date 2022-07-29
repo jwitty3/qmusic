@@ -6,7 +6,7 @@ This app uses data from quantum states, generated with qutip, to generate a seri
 
 ## Installation
 
-To install the app, go to [Releases](https://github.com/jwitty3/qmusic/releases/tag/v0.2.0) and download the appropriate executable file for your operating system. Simply open the file to run the app.
+To install the app, go to [Releases](https://github.com/jwitty3/qmusic/releases) and download the appropriate executable file for your operating system. Simply open the file to run the app.
 
 ## Using the App
 
